@@ -8,17 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Binding var selection: AppScreen?
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView(selection: $selection) {
+            ForEach(AppScreen.allCases) { screen in
+                screen.destionation
+                    .tag(screen as AppScreen)
+                    .tabItem { screen.label }
+            }
         }
-        .padding()
     }
-}
-
-#Preview {
-    ContentView()
 }
